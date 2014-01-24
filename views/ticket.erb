@@ -1,0 +1,24 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1>第0回 MonaKuji Ticket Sheet</h1>
+    <p>Sheet ID: <%= @sheet.name %>
+</div>
+</div>
+
+<div class="container">
+  <h2>シート情報</h2>
+  <table class="table">
+    <tr><th>金額</th><td><%= # @sheet.price %></td></tr>
+    <tr><th>入金状態</th></tr>
+    <%= # "有効" if @sheet. %>
+  </table>
+  <h2>くじ情報</h2>
+  <table class="table">
+    <tr><th></th><th>チケットID</th><tr>
+        <% @sheet.tickets.each_with_index do |ticket, i| %>
+          <tr><td><%= i %></td><td><%= ticket.name %></td></tr>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="jumbotron">
+  <div class="container">
+    <h1>第0回 MonaKuji Ticket Sheet</h1>
+    このページのURLをブックマークしてください
+</div>
+</div>
+
+<div class="container">
+  <h2>シート情報</h2>
+  <table class="table">
+    <tr><th>Sheet ID</th><td><%= @sheet.name %></td></tr>
+    <tr><th>金額</th><td><%= @sheet.price %> Mona</td></tr>
+    <tr><th>支払い額</th><td><%= @sheet.paid_confirmed %> Mona 確認済 (未確認分 <%= @sheet.paid - @sheet.paid_confirmed %> Mona)</td></tr> 
+    <% if !@sheet.paid? %>
+      <tr><th>支払いアドレス</th><td><a href="monacoin:<%= @sheet.address %>?amount=<%= @sheet.price %>&label=Monakuji:%20<%= @sheet.name %>"><%= @sheet.address %></a></td></tr>
+    <% end %>
+  </table>
+  <h2>くじ情報</h2>
+  <% if @sheet.paid? %>
+    <table class="table">
+    <tr><th></th><th>チケットID</th></tr>
+    <% for ticket in @sheet.tickets %>
+      <tr><td>1</td><td><%= ticket.number %></td></tr>
+    <% end %>
+  <% else %>
+      支払いが未確認のため、表示できません
+  <% end%>
+  </table>
+
+</div>
+  </div>
+</div>
