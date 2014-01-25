@@ -1,3 +1,5 @@
+# DataMapper.setup(:default, 'mysql://osyoyu:@localhost/monakuji')
+DataMapper.setup(:default, 'sqlite:db.sqlite3')
 class Lottery
   include DataMapper::Resource
 

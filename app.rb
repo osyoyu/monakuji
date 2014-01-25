@@ -5,8 +5,6 @@ require './monacoin_rpc.rb'
 
 class MonaKuji < Sinatra::Base
   configure do
-    DataMapper.setup(:default, 'mysql://osyoyu:hogefuga@localhost/monakuji')
-    # DataMapper.setup(:default, 'sqlite:db.sqlite3')
     DataMapper.finalize.auto_upgrade!
 
     @@wallet = MonacoinRPC.new('http://monacoinrpc:E3P7qnDmbLsmvLTp7cyyLwJ4d1PZsr9WrVTBkBxR34jZ@127.0.0.1:10010')

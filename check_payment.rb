@@ -1,6 +1,5 @@
 require 'data_mapper'
 require './models.rb'
-DataMapper.setup(:default, 'mysql://osyoyu:hogefuga@localhost/monakuji')
 DataMapper.finalize.auto_upgrade!
 
 require './monacoin_rpc.rb'

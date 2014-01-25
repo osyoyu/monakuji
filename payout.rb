@@ -2,8 +2,6 @@
 
 require 'data_mapper'
 require './models.rb'
-DataMapper.setup(:default, 'mysql://osyoyu:hogefuga@localhost/monakuji')
-DataMapper.finalize.auto_upgrade!
 
 require './monacoin_rpc.rb'
 wallet = MonacoinRPC.new('http://monacoinrpc:E3P7qnDmbLsmvLTp7cyyLwJ4d1PZsr9WrVTBkBxR34jZ@127.0.0.1:10010')
