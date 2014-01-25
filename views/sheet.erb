@@ -20,9 +20,9 @@
 setTimeout("location.reload()", 30000);
     </script></td></tr>
   <% end %>
-    <% if @sheet.payout > 0 %>
+    <% if @sheet.payout >= 0 %>
       <tr><th>当選金総額</th><td><span style="color: #f00; font-size: 16px"><%= @sheet.payout %> Mona</span> 
-        <% if @sheet.payouted = false %>
+        <% if @sheet.payouted == false %>
           (<a href="/payout/<%= @sheet.name %>">受け取る</a>)<% else %>
         (受取済み)
       <% end %></td></tr>
