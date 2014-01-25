@@ -10,7 +10,8 @@
     <div class="col-md-4">
       <h2>MonaKujiを購入</h2>
       <form action="/buy" method="post" id="buy">
-        <input type="number" id="units" name="units" min="0">
+        <input type="number" id="units" name="units" min="1" max="500" placeholder="購入する数 (1-500)" style="width: 50%"><br>
+        <input type="text" name="address" placeholder="当選金を送信するアドレス" style="width: 50%">
         <button type="submit">購入</button>
         <br>
         (<span id="in-mona">0</span> Mona)
@@ -21,16 +22,13 @@
       <h2>第0回 MonaKuji</h2>
       <h3>注意事項</h3>
       <ul>
-        <li>テストラウンドということで、当選金は控えめにしてあります。</li>
-        <li>また, 総合計80Mona以上の購入がなかった場合, 配当ができないため全額返金します。</li>
       </ul>
       <h3>当選金</h3>
       <table class="table">
         <tr><th>等級</th><th>当選Mona</th><th>当選本数</th></tr>
-        <tr><td>1等</td><td>50 Mona</td><td>1本</td></tr>
-        <tr><td>2等</td><td>10 Mona</td><td>3本</td></tr>
-        <tr><td>3等</td><td>3 Mona</td><td>下2ケタ一致</td></tr>
-        <tr><td>4等</td><td>0.3 Mona</td><td>下1ケタ一致</td></tr>
+        <tr><td>1等</td><td>100 Mona か 総売上の40% の小さい方</td><td>1本</td></tr>
+        <tr><td>2等</td><td></td><td>下2ケタ一致</td></tr>
+        <tr><td>3等</td><td>0.3 Mona</td><td>下1ケタ一致</td></tr>
       </table>
     </div>
   </div>

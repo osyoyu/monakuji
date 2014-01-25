@@ -13,9 +13,13 @@ class Sheet
   property :id,      Serial
   property :name,    String
   property :address, String
-  property :price,   Float
+  property :price,   Float, :default => 0.0
   property :paid,    Float, :default => 0.0
   property :paid_confirmed, Float, :default => 0.0
+  property :payout_address, String
+  property :payout,  Float, :default => 0.0
+  property :payouted, Boolean, :default => false
+
   # property :p,   Boolean, :default => false
 
   # belongs_to :lottery
@@ -35,6 +39,7 @@ class Ticket
 
   property :id,     Serial
   property :number, Integer
+  property :message, String
 
   belongs_to :sheet
 end
