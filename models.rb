@@ -5,12 +5,12 @@ class Sheet
   property :name,    String
   property :address, String
 
-  property :units,   Integer, :required => true
-  property :paid,    Float, :default => 0.0
+  property :units,   Integer, :default => 0, :required => true
+  property :paid,    Float,   :default => 0.0
   property :paid_confirmed, Float, :default => 0.0
 
   property :payout_address, String
-  property :payout_amount,  Float, :default => 0.0
+  property :payout,  Float, :default => -1.0
   property :payouted?,      Boolean, :default => false
 
   has n, :tickets
@@ -25,6 +25,10 @@ class Sheet
     else
       false
     end
+  end
+
+  def paid_unconfirmed
+    (self.paid - self.paid_confirmed).round(8)
   end
 
   before :create do

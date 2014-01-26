@@ -9,7 +9,7 @@
   <div class="row">
     <div class="col-md-4">
       <h2>MonaKujiを購入</h2>
-      <span style="color: #f00">新規購入は締めきりました</span>
+      <!-- <span style="color: #f00">新規購入は締めきりました</span> -->
       <form action="/buy" method="post" id="buy">
         <input type="number" id="units" name="units" min="1" max="500" placeholder="購入する数 (1-500)" style="width: 50%"><br>
         <input type="text" name="address" placeholder="当選金を送信するアドレス" style="width: 50%">
@@ -17,27 +17,29 @@
         <br>
         (<span id="in-mona">0</span> Mona)
       </form>
-      <ul>
-        <li>1口 0.3 Mona</li>
-        <li>(1-500口)</li>
-      </ul>
     </div>
 
     <div class="col-md-8">
-      <h2>第0回 MonaKuji</h2>
-      <h3>注意事項</h3>
+      <h2>第2回 MonaKuji</h2>
       <ul>
-        <li>試験運用中です。あまり大きな額は使わないでください。</li>
-        <li>何かトラブルがあった際は Twitter: <a href="http://twitter.com/0x_osyoyu">@0x_osyoyu</a> にご連絡ください。</li>
+        <li>1口 0.3 Mona</li>
+        <li>1回あたり 1-500口 購入可 (501口以上購入する場合は2回以上に分割してください)</li>
       </ul>
+
       <h3>当選金</h3>
       <table class="table">
         <tr><th>等級</th><th>当選Mona</th><th>当選本数</th></tr>
-        <tr><td>1等</td><td>100 Mona か 総売上の40% の小さい方</td><td>1本</td></tr>
-        <tr><td>2等</td><td>1等と3等の総合計に基いて自動設定</td><td>下2ケタ一致</td></tr>
-        <tr><td>3等</td><td>0.3 Mona</td><td>下1ケタ一致</td></tr>
+        <tr><td>1等</td><td>総販売額の 40% もしくは 100 Mona の小さい方</td><td>1本</td></tr>
+        <tr><td>2等</td><td>総販売額に基いて自動設定</td><td>1% (下2ケタ一致)</td></tr>
+        <tr><td>3等</td><td>0.3 Mona</td><td>10% (下1ケタ一致)</td></tr>
       </table>
-      コードはこちら <a href="https://github.com/tomoari/monakuji">https://github.com/tomoari/monakuji</a>
+
+      <h3>注意事項</h3>
+      <ul>
+        <li>試験運用中です。あまり大きな額は使わないでください。</li>
+        <li>何かトラブルがあった際は Twitter: <a href="https://twitter.com/0x_osyoyu">@0x_osyoyu</a> にご連絡ください。</li>
+        <li>コードはこちら <a href="https://github.com/tomoari/monakuji">https://github.com/tomoari/monakuji</a></li>
+      </ul>
     </div>
   </div>
 </div>

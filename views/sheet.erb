@@ -12,23 +12,32 @@
     <tr><th>当選金受け取りアドレス</th><td><%= @sheet.payout_address %></td></tr>
     <tr><th>くじ数</th><td><%= @sheet.tickets.length %> 口</td></tr>
     <tr><th>金額</th><td><%= @sheet.price %> Mona</td></tr>
-    <tr><th>支払い額</th><td><%= @sheet.paid_confirmed %> Mona 確認済 (未確認分 <%= @sheet.paid - @sheet.paid_confirmed %> Mona)</td></tr> 
-    <% if !@sheet.paid? %>
-      <tr><th>支払いアドレス</th><td><a href="monacoin:<%= @sheet.address %>?amount=<%= @sheet.price %>&label=Monakuji:%20<%= @sheet.name %>"><%= @sheet.address %></a>
-        <br>(このページは30秒ごとに自動的にリロードされます)
-        <script type="text/javascript">
-setTimeout("location.reload()", 30000);
-    </script></td></tr>
-  <% end %>
-    <% if @sheet.payout >= 0 %>
-      <tr><th>当選金総額</th><td><span style="color: #f00; font-size: 16px"><%= @sheet.payout %> Mona</span> 
-        <% if @sheet.payouted == false %>
-          (<a href="/payout/<%= @sheet.name %>">受け取る</a>)<% else %>
-        (受取済み)
-      <% end %></td></tr>
+    <tr><th>支払い額</th><td><%= @sheet.paid_confirmed %> Mona 確認済 (未確認分 <%= @sheet.paid_unconfirmed %> Mona)</td></tr> 
 
-  <% end %>
+    <% if !@sheet.paid? %>
+      <tr>
+      <th>支払いアドレス</th>
+      <td><a href="monacoin:<%= @sheet.address %>?amount=<%= @sheet.price %>&label=Monakuji:%20<%= @sheet.name %>"><%= @sheet.address %></a><br>
+        (このアドレスに価格)
+        <script type="text/javascript">setTimeout("location.reload()", 30000);</script>
+      </td>
+      </tr>
+    <% end %>
+
+    <% if @sheet.payout >= 0 %>
+      <tr>
+      <th>当選金総額</th>
+      <td><span style="color: #f00; font-size: 16px"><%= @sheet.payout %> Mona</span>
+        <% if @sheet.payouted == false %>
+         (<a href="/payout/<%= @sheet.name %>">受け取る</a>)
+       <% else %>
+         (受取済み)
+       <% end %>
+      </td>
+      </tr>
+    <% end %>
   </table>
+
   <h2>くじ情報</h2>
   <% if @sheet.paid? %>
     <table class="table">
@@ -36,11 +45,9 @@ setTimeout("location.reload()", 30000);
     <% for ticket in @sheet.tickets %>
       <tr><td><%= ticket.number %></td><td><span style="color: #f00"><%= ticket.message %></span></tr>
     <% end %>
-    <% else %>
-        支払いが全額確認されると表示されます。
-    <% end%>
     </table>
+  <% else %>
+        支払いが全額確認されると表示されます(支払いが全額確認されるまでは有効になりません)。
+  <% end %>
 
-  </div>
-</div>
 </div>

@@ -12,7 +12,7 @@ class MonaKuji < Sinatra::Base
   end
 
   helpers do
-    def get_payment_address
+    def get_payout_address
       @@wallet.getnewaddress
     end
 
@@ -35,10 +35,7 @@ class MonaKuji < Sinatra::Base
     halt("正しい受け取り用アドレスを指定してください") if !@@wallet.validateaddress(payout_address)["isvalid"]
     halt("1口から500口までしか買えないよ！") if units < 1 || units > 500
 
-    sheet = Sheet.new
-    sheet.units = units
-    sheet.address = get_payment_address
-    sheet.payout_address = payout_address
+    sheet = Sheet.new(:units => units, :address => get_payout_address, :payout_address => payout_address)
 
     units.times do
       sheet.tickets.new
@@ -47,7 +44,7 @@ class MonaKuji < Sinatra::Base
     sheet.save
     puts "Sheet ID: #{sheet.name} / #{units} Tickets\n========"
 
-    redirect "/sheet/#{sheet_name}"
+    redirect "/sheet/#{sheet.name}"
   end
 
   get '/sheet/:name/?' do
