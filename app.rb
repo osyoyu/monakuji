@@ -5,6 +5,7 @@ require './monacoin_rpc.rb'
 
 class MonaKuji < Sinatra::Base
   configure do
+    DataMapper.setup(:default, 'sqlite:db.sqlite3')
     DataMapper.finalize.auto_upgrade!
 
     @@wallet = MonacoinRPC.new('http://monacoinrpc:E3P7qnDmbLsmvLTp7cyyLwJ4d1PZsr9WrVTBkBxR34jZ@127.0.0.1:10010')
@@ -13,11 +14,6 @@ class MonaKuji < Sinatra::Base
   helpers do
     def create_name(length)
       chars = ('a'..'z').to_a + ('0'..'9').to_a
-      Array.new(length){chars[rand(chars.size)]}.join
-    end
-
-    def create_number(length)
-      chars = ('0'..'9').to_a
       Array.new(length){chars[rand(chars.size)]}.join
     end
 
@@ -36,6 +32,7 @@ class MonaKuji < Sinatra::Base
   post '/buy' do
     units = params[:units].to_i
     payout_address = params[:address]
+
     halt("正しい受け取り用アドレスを指定してください") if !@@wallet.validateaddress(payout_address)["isvalid"]
     halt("1口から500口までしか買えないよ！") if units < 1 || units > 500
 
@@ -46,24 +43,11 @@ class MonaKuji < Sinatra::Base
     sheet.payout_address = payout_address
 
     units.times do
-      number = create_number(6)
-      if !Ticket.first(:number => number)
-        puts "Unused number #{number} found"
-        ticket = sheet.tickets.new(:number => number)
-        if ticket.save
-          puts "Saved."
-        else
-          # BUG: Strangely, save fails when number starts from a '0'
-          puts "Save failed: retrying"
-          redo
-        end
-      else
-        puts "Invalid: #{number}"
-        redo
-      end
+      sheet.tickets.new
     end
 
     sheet.save
+    puts "Sheet ID: #{sheet.name} / #{units} Tickets\n========"
 
     redirect "/sheet/#{sheet_name}"
   end
