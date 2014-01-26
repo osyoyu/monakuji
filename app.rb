@@ -12,11 +12,6 @@ class MonaKuji < Sinatra::Base
   end
 
   helpers do
-    def create_name(length)
-      chars = ('a'..'z').to_a + ('0'..'9').to_a
-      Array.new(length){chars[rand(chars.size)]}.join
-    end
-
     def get_payment_address
       @@wallet.getnewaddress
     end
@@ -29,6 +24,10 @@ class MonaKuji < Sinatra::Base
     erb :index, :layout => :layout
   end
 
+  get '/buy' do
+    redirect "/"
+  end
+
   post '/buy' do
     units = params[:units].to_i
     payout_address = params[:address]
@@ -36,9 +35,8 @@ class MonaKuji < Sinatra::Base
     halt("正しい受け取り用アドレスを指定してください") if !@@wallet.validateaddress(payout_address)["isvalid"]
     halt("1口から500口までしか買えないよ！") if units < 1 || units > 500
 
-    sheet_name = create_name(32)
-    sheet = Sheet.new(:name => sheet_name)
-    sheet.price = (0.3 * units).round(8)
+    sheet = Sheet.new
+    sheet.units = units
     sheet.address = get_payment_address
     sheet.payout_address = payout_address
 

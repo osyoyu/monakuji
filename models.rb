@@ -5,7 +5,7 @@ class Sheet
   property :name,    String
   property :address, String
 
-  property :price,   Float, :default => 0.0
+  property :units,   Integer, :required => true
   property :paid,    Float, :default => 0.0
   property :paid_confirmed, Float, :default => 0.0
 
@@ -15,12 +15,22 @@ class Sheet
 
   has n, :tickets
 
+  def price
+    (0.3 * self.units).round(8)
+  end
+
   def paid?
     if self.paid_confirmed >= self.price
       true
     else
       false
     end
+  end
+
+  before :create do
+    name = ((0..9).to_a + ("a".."z").to_a + ("A".."Z").to_a).sample(32).join
+
+    self.name = name
   end
 end
 
