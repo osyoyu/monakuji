@@ -1,3 +1,5 @@
+DataMapper.setup(:default, 'sqlite:db.sqlite3')
+
 class Sheet
   include DataMapper::Resource
 
