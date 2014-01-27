@@ -18,7 +18,7 @@
       <tr>
       <th>支払いアドレス</th>
       <td><a href="monacoin:<%= @sheet.address %>?amount=<%= @sheet.price %>&label=Monakuji:%20<%= @sheet.name %>"><%= @sheet.address %></a><br>
-        (このアドレスに価格)
+        (このアドレスに <%= @sheet.price %> Mona を送金してください)
         <script type="text/javascript">setTimeout("location.reload()", 30000);</script>
       </td>
       </tr>
