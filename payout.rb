@@ -78,7 +78,7 @@ Sheet.all.each do |sheet|
     payout = payout.round(8)
     sheet.payout = payout
     sheet.payouted = true if payout == 0
-    total_payout =+ sheet.payout
+    total_payout += sheet.payout
     sheet.save if !options['dry-run']
 
     puts "Payout to sheet #{sheet.name} will be #{payout}"
