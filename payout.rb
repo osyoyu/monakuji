@@ -30,8 +30,8 @@ puts "2nd Prize: #{second_prize}"
 puts "3rd Prize: 0.3"
 
 p first_prize_number = rand(ticket_count) + 1
-p second_prize_number = Regexp.new("[0-9]+" + rand(100).to_s + "$")
-p third_prize_number = Regexp.new("[0-9]+" + rand(10).to_s + "$")
+p second_prize_number = rand(100).to_s
+p third_prize_number = rand(10).to_s
 
 t = 0
 Sheet.all.each do |sheet|
@@ -48,7 +48,7 @@ Sheet.all.each do |sheet|
         next
       end
 
-      if (ticket.number.to_s =~ second_prize_number) == 0
+      if ticket.number.to_send_with?(second_prize_number)
         puts "!!!! 2nd: #{ticket.number}"
         ticket.message = "2等 (#{second_prize} Mona)"
         payout += second_prize.to_f
@@ -56,7 +56,7 @@ Sheet.all.each do |sheet|
         next
       end
 
-      if (ticket.number.to_s =~ third_prize_number) == 0
+      if ticket.number.to_send_with?(third_prize_number)
         puts "!3rd: #{ticket.number}"
         ticket.message = "3等 (0.3 Mona)"
         payout += 0.3
@@ -66,6 +66,7 @@ Sheet.all.each do |sheet|
     end
     payout = payout.round(8)
     sheet.payout = payout
+    sheet.payouted = true if payout == 0
     sheet.save
 
     puts "Payout to sheet #{sheet.name} will be #{payout}"
