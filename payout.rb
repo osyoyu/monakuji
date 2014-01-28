@@ -39,7 +39,7 @@ puts "2nd Prize: #{second_prize}"
 puts "3rd Prize: 0.3"
 
 p first_prize_number = rand(ticket_count) + 1
-p second_prize_number = Regexp.new("[0-9]+(" + rand(100).to_s + "|" + rand(100).to_s + ")$")
+p second_prize_number = Regexp.new("[0-9]+(" + (rand(90) + 10).to_s + "|" + (rand(90) + 10).to_s + ")$")
 p third_prize_number  = Regexp.new("[0-9]+" + rand(10).to_s + "$")
 
 total_payout = 0.0
